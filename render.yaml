@@ -1,0 +1,19 @@
+services:
+  # Backend Service
+  - type: web
+    name: attendance-tracker-backend
+    runtime: docker
+    dockerfilePath: ./backend-prod/Dockerfile
+    dockerContext: ./backend-prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: FRONTEND_URL
+        sync: false
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 5
+    healthCheckPath: /api/health
